@@ -16,3 +16,7 @@ WORKDIR /pelikan
 
 # Compile the fuzzers.
 RUN ${HOME}/.cargo/bin/cargo fuzz build --fuzz-dir /pelikan/src/storage/seg/fuzz
+
+# Copy the fuzzers to the final image.
+FROM ubuntu:20.04
+COPY --from=builder /pelikan /pelikan
